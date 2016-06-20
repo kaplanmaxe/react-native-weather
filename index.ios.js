@@ -12,6 +12,7 @@ import {
   Text,
   View
 } from 'react-native';
+var Api = require('./src/api.js');
 
 class weather extends Component {
   constructor(props, context) {
@@ -21,11 +22,13 @@ class weather extends Component {
       pin: {
         latitude: 0,
         longitude: 0
-      }
+      },
+      city: '',
+      temperature: '',
+      description: ''
     };
   }
   render() {
-    console.log(this.state.pin);
     return (
       <MapView
         annotations={[this.state.pin]}
@@ -39,6 +42,10 @@ class weather extends Component {
         longitude: region.longitude,
         latitude: region.latitude
       }
+    });
+    Api(region.latitude, region.longitude).then((data) => {
+      console.log(data);
+      this.setState(data);
     });
   }
 }
