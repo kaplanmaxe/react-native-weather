@@ -30,10 +30,18 @@ class weather extends Component {
   }
   render() {
     return (
-      <MapView
-        annotations={[this.state.pin]}
-        style={styles.map}
-        onRegionChangeComplete={this.onRegionChangeComplete}/>
+      <View style={styles.container}>
+        <MapView
+          annotations={[this.state.pin]}
+          style={styles.map}
+          onRegionChangeComplete={this.onRegionChangeComplete}>
+        </MapView>
+        <View style={styles.textWrapper}>
+          <Text style={styles.text}>{this.state.city}</Text>
+          <Text style={styles.text}>{this.state.temperature}</Text>
+          <Text style={styles.text}>{this.state.description}</Text>
+        </View>
+      </View>
     );
   }
   onRegionChangeComplete = (region) => {
@@ -51,8 +59,23 @@ class weather extends Component {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'stretch',
+    backgroundColor: '#F5FCFF'
+  },
+
   map: {
-    flex: 1
+    flex: 2,
+    marginTop: 30
+  },
+  textWrapper: {
+    flex: 1,
+    alignItems: 'center'
+  },
+  text: {
+    fontSize: 30
   }
 });
 

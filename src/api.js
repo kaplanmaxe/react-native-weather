@@ -1,4 +1,5 @@
 const rootUrl = 'http://api.openweathermap.org/data/2.5/weather?appid=9272f1b374172c3f341800b173602ba3';
+const _ = require('lodash');
 
 var kelvinToF = function(kelvin) {
     return Math.round((kelvin-273.15) * 1.8 + 32) + ' ˚F';
@@ -14,7 +15,7 @@ module.exports = function(latitude, longitude) {
     return {
       city: json.name,
       temperature: kelvinToF(json.main.temp),
-      descripton: json.weather[0].description
+      description: _.capitalize(json.weather[0].description)
     }
   });
 }
